@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from "react";
-import Table from "react-bootstrap/Table";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { team } from "./teamData";
+import React from "react";
+import { v4 as uuid } from "uuid";
+import TeamMember from "./TeamMember";
+import "./Team.css";
 
-let teamData = team;
-
-function Team() {
+function Team({ teamData }) {
   return (
-    <div>
-      <h1 role="heading">Team</h1>
-      {teamData.map((m, index) => {
-        return <Row data-testid={`user-${index}`}>{`${m.user_full_name}`}</Row>;
-      })}
+    <div className="team">
+      <h1>Team</h1>
+      <div className="team-roster">
+        {teamData.map((u) => {
+          return (
+            <TeamMember
+              key={uuid()}
+              user={u}
+              data-testid={`user-${u.user_id}`}
+            >{`${u.user_full_name}`}</TeamMember>
+          );
+        })}
+      </div>
     </div>
   );
 }

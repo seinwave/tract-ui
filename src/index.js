@@ -1,14 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import { team } from "./teamData";
+import Team from "./Team";
+import reportWebVitals from "./reportWebVitals";
+
+let teamData = team[0];
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Team teamData={teamData} />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,0 +1,62 @@
+.team {
+  background-color: hsl(0, 0%, 97%);
+}
+
+.team-roster {
+  border-radius: 25px;
+  margin-left: 45px;
+  margin-bottom: 25px;
+  background-color: #fff;
+  width: 60%;
+  box-shadow: inset 0 1px 0 hsl(224, 84%, 74%);
+  box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
+}
+
+.user-container {
+  display: flex;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-top: 2px solid hsl(210, 23%, 95%);
+  margin-left: 40px;
+  background-color: #fff;
+}
+
+.user-attributes-container {
+  display: flex;
+  width: 40%;
+}
+
+.profile-img {
+  height: 80px;
+  width: 80px;
+  border-radius: 100px;
+  margin-right: 15px;
+  margin-top: 12px;
+}
+
+.user-attributes-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.user-headline-wrapper {
+  margin-bottom: 6px;
+}
+
+.user-name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.user-role {
+  font-size: 18px;
+  font-weight: 300;
+  color: hsl(261, 47%, 58%);
+  margin-bottom: 3px;
+}
+
+.user-email {
+  font-size: 14px;
+  font-weight: 300;
+}
