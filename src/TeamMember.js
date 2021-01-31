@@ -4,6 +4,14 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function capitalizeMultiple(str) {
+  return str.split(" ").map(capitalize).join(" ");
+}
+
 function TeamMember({ user }) {
   return (
     <div data-testid={`user-${user.user_id}`} className="user-container">
@@ -33,7 +41,22 @@ function TeamMember({ user }) {
           </span>
         </div>
       </div>
-      <div className="user-activity-container"></div>
+      <div className="user-activity-container">
+        <div className="user-recent-activity">
+          <span
+            data-testid="user-most-recent-act"
+            className="attribute user-activity"
+          >
+            {capitalizeMultiple(user.user_activity[0].activity)}
+          </span>
+          <span
+            data-testid="user-activity-date"
+            className="attribute user-activity-date"
+          >
+            {dayjs(user.user_activity[0].timestamp).fromNow()}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

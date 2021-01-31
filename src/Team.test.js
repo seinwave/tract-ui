@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { userEvent } from "@testing-library/userEvent";
 import Team from "./Team";
 
 const team = [
@@ -7,6 +8,10 @@ const team = [
     user_full_name: "Agatha Borpo",
     user_created_date: "2015-12-12 00:00:00",
     user_role: "admin",
+    user_activity: [
+      { timestamp: "2021-1-12 00:00:00", activity: "delete comment" },
+      { timestamp: "2021-1-21 00:00:00", activity: "add attachment" },
+    ],
     user_email: "a.Runcie.11@live.nl",
     ticket_title: "Too much gray",
     project_name: "Inventory tracker",
@@ -15,6 +20,10 @@ const team = [
     user_id: 3,
     user_created_date: "2013-10-11 00:00:00",
     user_full_name: "Alice Beale",
+    user_activity: [
+      { timestamp: "2021-1-12 00:00:00", activity: "delete comment" },
+      { timestamp: "2021-1-21 00:00:00", activity: "add attachment" },
+    ],
     user_role: "dev",
     user_email: "Adelaide.Pickett.64@verizon.net",
     ticket_title: "I forgot where I parked",
@@ -33,7 +42,6 @@ it("renders a roster of team members, complete with images, roles, and emails", 
   render(<Team teamData={team} />);
   // checking for users
   const users = screen.queryAllByTestId(/^user-\d/i);
-  console.log(users);
   expect(users).not.toBeNull();
   expect(users.length).toEqual(2);
 
@@ -51,7 +59,6 @@ it("renders a roster of team members, complete with images, roles, and emails", 
   const userEmails = screen.queryAllByTestId(/user-email/i);
   expect(userEmails).not.toBeNull();
   expect(userEmails.length).toEqual(2);
-  screen.debug();
 });
 
 it("converts admin roles to human readable titles", () => {
@@ -65,15 +72,33 @@ it("converts admin roles to human readable titles", () => {
   });
   const expectedRoles = ["Administrator", "Developer"];
   expect(userRoles).toEqual(expect.arrayContaining(expectedRoles));
+});
 
-  // checking for human-readable joined dates
-  // not using this in the UI anymore -- but save it for
-  // activityDates
-  // const joinedDateNodes = screen.queryAllByTestId(/user-joined-date/i);
-  // const joinedDates = [];
-  // joinedDateNodes.map((ujd) => {
-  //   return joinedDates.push(ujd.textContent);
-  // });
-  // const expectedJoinedDates = ["Joined 5 years ago", "Joined 7 years ago"];
-  // expect(joinedDates).toEqual(expect.arrayContaining(expectedJoinedDates));
+it("shows the user's most recent activity", () => {
+  render(<Team teamData={team} />);
+
+  // checking for most recent activity
+  const activityNodes = screen.queryAllByTestId(/user-most-recent-act/i);
+  const activities = [];
+  activityNodes.map((node) => {
+    return activities.push(node.textContent);
+  });
+  const expectedActivities = ["Delete Comment", "Delete Comment"];
+  expect(activities).toEqual(expect.arrayContaining(expectedActivities));
+
+  // checking for human-readable dates
+  const activityDates = screen.queryAllByTestId(/user-activity-date/i);
+  const dates = [];
+  activityDates.map((date) => {
+    return dates.push(date.textContent);
+  });
+  const expectedDates = ["20 days ago", "20 days ago"];
+  expect(dates).toEqual(expect.arrayContaining(expectedDates));
+});
+
+it("shows the individual team member's profile on click", () => {
+  render(<Team teamData={team} />);
+
+  // checking that a profile click works
+  const users = screen.queryAllByTestId(/^user-container/i);
 });
