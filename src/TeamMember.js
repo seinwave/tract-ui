@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import dayjs from "dayjs";
+import tony from "./images/tony.jpg";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
@@ -7,21 +8,24 @@ dayjs.extend(relativeTime);
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
-
 function capitalizeMultiple(str) {
   return str.split(" ").map(capitalize).join(" ");
 }
 
-function TeamMember({ user }) {
+function TeamMember({ user, handleUserClick }) {
   return (
-    <div data-testid={`user-${user.user_id}`} className="user-container">
+    <div
+      data-testid="user-container"
+      className="user-container"
+      onClick={() => handleUserClick(user)}
+    >
       <div className="user-attributes-container">
         <div className="profile-img-wrapper">
           <img
             height="200px"
             alt={`user-${user.user_full_name}`}
             className="profile-img"
-            src="http://www.mamamia.com.au/wp-content/uploads/2013/06/Tony-Soprano.jpg"
+            src={tony}
           ></img>
         </div>
         <div className="user-attributes-wrapper">
