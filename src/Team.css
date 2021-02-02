@@ -14,6 +14,20 @@ body {
   box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
 }
 
+.team-roster-blur {
+  filter: blur(2px);
+  z-index: 0;
+  padding: 15px;
+  border-radius: 25px;
+  margin-left: 220px;
+  margin-top: 80px;
+  margin-bottom: 25px;
+  background-color: #fff;
+  width: 55%;
+  box-shadow: inset 0 1px 0 hsl(224, 84%, 74%);
+  box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
+}
+
 .user-container {
   display: flex;
   cursor: pointer;

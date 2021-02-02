@@ -123,7 +123,7 @@ it("shows the user's most recent activity", () => {
   activityDates.map((date) => {
     return dates.push(date.textContent);
   });
-  const expectedDates = ["20 days ago", "20 days ago"];
+  const expectedDates = ["21 days ago", "21 days ago"];
   expect(dates).toEqual(expect.arrayContaining(expectedDates));
 });
 
@@ -134,8 +134,9 @@ it("clicking team member container exposes, then hides, modal profile", async ()
   let users = screen.getAllByTestId(/user-container/i);
   userEvent.click(users[0]);
   await waitFor(() => {
-    let modal = screen.getByTestId(/user-profile-modal/i);
-    expect(modal).toHaveTextContent("Agatha Borpo");
+    let modal = screen.queryByTestId(/user-profile-modal/i);
+    // modal has features we want?
+    expect(modal).not.toBeNull();
   });
 
   // 2nd profile click hides modal?
@@ -144,5 +145,25 @@ it("clicking team member container exposes, then hides, modal profile", async ()
   await waitFor(() => {
     let modal = screen.queryByTestId(/user-profile-modal/i);
     expect(modal).toBeNull();
+  });
+});
+
+it("contains a modal with relevant features", async () => {
+  render(<Team teamData={team} />);
+
+  let users = screen.getAllByTestId(/user-container/i);
+  userEvent.click(users[0]);
+  await waitFor(() => {
+    // modal has features we want?
+    let modalName = screen.getByTestId(/modal-profile-name/i);
+    expect(modalName).toHaveTextContent("Agatha Borpo");
+    let modalTitle = screen.getByTestId(/modal-profile-title/i);
+    expect(modalTitle).toHaveTextContent("Administrator");
+    let modalActivity = screen.getByTestId(/modal-profile-activity/i);
+    expect(modalActivity).toHaveTextContent(/delete comment/i);
+    let modalProjects = screen.getByTestId(/modal-profile-projects/i);
+    expect(modalProjects).toHaveTextContent(/inventory tracker/i);
+    let modalContact = screen.getByTestId(/modal-profile-contact/i);
+    expect(modalContact).toHaveTextContent("a.Runcie.11@live.nl");
   });
 });
