@@ -123,47 +123,42 @@ it("shows the user's most recent activity", () => {
   activityDates.map((date) => {
     return dates.push(date.textContent);
   });
-  const expectedDates = ["21 days ago", "21 days ago"];
+  const expectedDates = ["23 days ago", "23 days ago"];
   expect(dates).toEqual(expect.arrayContaining(expectedDates));
 });
 
-it("clicking team member container exposes, then hides, modal profile", async () => {
+it("clicking team member container exposes, then hides, modal profile", () => {
   render(<Team teamData={team} />);
 
   // 1st profile click exposes modal?
   let users = screen.getAllByTestId(/user-container/i);
   userEvent.click(users[0]);
-  await waitFor(() => {
-    let modal = screen.queryByTestId(/user-profile-modal/i);
-    // modal has features we want?
-    expect(modal).not.toBeNull();
-  });
+  let modal = screen.queryByTestId(/user-profile-modal/i);
+  expect(modal).not.toBeNull();
 
   // 2nd profile click hides modal?
   users = screen.getAllByTestId(/user-container/i);
   userEvent.click(users[0]);
-  await waitFor(() => {
-    let modal = screen.queryByTestId(/user-profile-modal/i);
-    expect(modal).toBeNull();
-  });
+  modal = screen.queryByTestId(/user-profile-modal/i);
+  expect(modal).toBeNull();
 });
 
-it("contains a modal with relevant features", async () => {
+it("has a modal can be closed with an 'X' button", () => {
   render(<Team teamData={team} />);
-
+  // modal's not around before the click
   let users = screen.getAllByTestId(/user-container/i);
+  let modal = screen.queryByTestId(/user-profile-modal/i);
+  expect(modal).toBeNull();
+
+  // clicking user brings modal into the DOM
   userEvent.click(users[0]);
-  await waitFor(() => {
-    // modal has features we want?
-    let modalName = screen.getByTestId(/modal-profile-name/i);
-    expect(modalName).toHaveTextContent("Agatha Borpo");
-    let modalTitle = screen.getByTestId(/modal-profile-title/i);
-    expect(modalTitle).toHaveTextContent("Administrator");
-    let modalActivity = screen.getByTestId(/modal-profile-activity/i);
-    expect(modalActivity).toHaveTextContent(/delete comment/i);
-    let modalProjects = screen.getByTestId(/modal-profile-projects/i);
-    expect(modalProjects).toHaveTextContent(/inventory tracker/i);
-    let modalContact = screen.getByTestId(/modal-profile-contact/i);
-    expect(modalContact).toHaveTextContent("a.Runcie.11@live.nl");
-  });
+  modal = screen.queryByTestId(/user-profile-modal/i);
+  expect(modal).not.toBeNull();
+
+  // clicking the 'X' makes the modal go away
+  let closeButton = screen.queryByTestId(/modal-close-button/i);
+  expect(closeButton).not.toBeNull();
+  userEvent.click(closeButton);
+  modal = screen.queryByTestId(/user-profile-modal/i);
+  expect(modal).toBeNull();
 });

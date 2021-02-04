@@ -1,19 +1,29 @@
 import React from "react";
+import PropTypes from "prop-types";
 import tony from "./images/tony.jpg";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { capitalize, capitalizeMultiple } from "./utils.js";
+import { v4 as uuid } from "uuid";
+import { capitalizeMultiple } from "./utils.js";
 import "./TeamMemberModal.css";
 
 dayjs.extend(relativeTime);
 
-function TeamMemberModal({ user }) {
+function TeamMemberModal({ user, handleUserClick }) {
   return (
     <div data-testid="user-profile-modal" className="user-profile-modal">
       <div className="modal-hero">
+        <div className="modal-close-button-wrapper">
+          <button
+            className="modal-close-button"
+            data-testid="modal-close-button"
+            onClick={handleUserClick}
+          >
+            ×
+          </button>
+        </div>
         <div className="modal-banner">
           <div className="modal-background-image-wrapper"></div>
-          <div className="modal-closeout-button"></div>
         </div>
         <div className="modal-profile-photo-wrapper">
           <img
@@ -43,14 +53,22 @@ function TeamMemberModal({ user }) {
           data-testid="modal-profile-activity"
           className="modal-profile-activity"
         >
-          <span className="modal-activity-headline">Activity</span>
+          <span className="modal-info-headline modal-headline">Activity</span>
           {user.user_activity.slice(0, 2).map((a) => {
             return (
-              <div className="modal-activity-report">
-                <span className="modal-activity">
+              <div key={uuid()} className="modal-activity-report">
+                <span
+                  className={
+                    a.activity.includes("delete")
+                      ? "modal-activity-delete modal-item"
+                      : a.activity.includes("add")
+                      ? "modal-activity-add modal-item"
+                      : "modal-activity modal-item"
+                  }
+                >
                   {capitalizeMultiple(a.activity)}
                 </span>
-                <span className="modal-activity">
+                <span className="modal-activity modal-item modal-activity-timestamp">
                   {dayjs(a.timestamp).fromNow()}
                 </span>
               </div>
@@ -61,15 +79,15 @@ function TeamMemberModal({ user }) {
           data-testid="modal-profile-projects"
           className="modal-profile-projects"
         >
-          <span className="modal-activity-headline">Projects</span>
-          <span className="modal-activity">{user.project_name}</span>
+          <span className="modal-info-headline modal-headline">Projects</span>
+          <span className="modal-project modal-item">{user.project_name}</span>
         </div>
         <div
           data-testid="modal-profile-contact"
           className="modal-profile-contact"
         >
-          <span className="modal-activity-headline">Contact</span>
-          {user.user_email}
+          <span className="modal-info-headline modal-headline">Contact</span>
+          <span className="modal-item modal-email">{user.user_email}</span>
         </div>
       </div>
     </div>
@@ -77,3 +95,16 @@ function TeamMemberModal({ user }) {
 }
 
 export default TeamMemberModal;
+
+TeamMemberModal.propTypes = {
+  user: PropTypes.shape({
+    project_name: PropTypes.string.isRequired,
+    ticket_title: PropTypes.string.isRequired,
+    user_activity: PropTypes.array.isRequired,
+    user_created_date: PropTypes.string.isRequired,
+    user_email: PropTypes.string.isRequired,
+    user_full_name: PropTypes.string.isRequired,
+    user_id: PropTypes.number.isRequired,
+    user_role: PropTypes.string.isRequired,
+  }),
+};

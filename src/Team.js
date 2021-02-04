@@ -16,7 +16,9 @@ function Team({ teamData }) {
   return (
     <div className="team">
       <h1>Team</h1>
-      {clickedUser ? <TeamMemberModal user={clickedUser} /> : null}
+      {clickedUser ? (
+        <TeamMemberModal user={clickedUser} handleUserClick={handleUserClick} />
+      ) : null}
       <div className={clickedUser ? "team-roster-blur" : "team-roster"}>
         {teamData.map((u) => {
           return (

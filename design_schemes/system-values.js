@@ -1,6 +1,5 @@
-// COLOR PALETTE
-{
-    // Primary
+const colors = {
+  primary: {
     "purple-050": "#EAE2F8",
     "purple-100": "#CFBCF2",
     "purple-200": "#A081D9",
@@ -21,7 +20,8 @@
     "red-vivid-700": "#AB091E",
     "red-vivid-800": "#8A041A",
     "red-vivid-900": "#610316",
-    // Neutrals
+  },
+  neutrals: {
     "blue-grey-050": "#F0F4F8",
     "blue-grey-100": "#D9E2EC",
     "blue-grey-200": "#BCCCDC",
@@ -32,7 +32,8 @@
     "blue-grey-700": "#334E68",
     "blue-grey-800": "#243B53",
     "blue-grey-900": "#102A43",
-    // Supporting
+  },
+  supporting: {
     "teal-vivid-050": "#F0FCF9",
     "teal-vivid-100": "#C6F7E9",
     "teal-vivid-200": "#8EEDD1",
@@ -53,37 +54,42 @@
     "yellow-vivid-700": "#CB6E17",
     "yellow-vivid-800": "#B44D12",
     "yellow-vivid-900": "#8D2B0B",
-}
-// FONT SIZES 
-[
-    "12px",
-    "14px",
-    "16px",
-    "18px",
-    "20px",
-    "24px",
-    "30px",
-    "36px",
-    "48px",
-    "60px",
-    "72px",
-]
-// SPACING INTERVALS
-[
-    "4px",
-    "8px",
-    "12px",
-    "16px",
-    "24px",
-    "32px",
-    "48px",
-    "64px",
-    "96px",
-    "128px",
-    "192px",
-    "256px",
-    "384px",
-    "512px",
-    "640px",
-    "768px",
-]
+  },
+};
+const fontSizes = [
+  "12px",
+  "14px",
+  "16px",
+  "18px",
+  "20px",
+  "24px",
+  "30px",
+  "36px",
+  "48px",
+  "60px",
+  "72px",
+];
+const spacing = [
+  "4px",
+  "8px",
+  "12px",
+  "16px",
+  "24px",
+  "32px",
+  "48px",
+  "64px",
+  "96px",
+  "128px",
+  "192px",
+  "256px",
+  "384px",
+  "512px",
+  "640px",
+  "768px",
+];
+
+module.exports = {
+  colors,
+  spacing,
+  fontSizes,
+};

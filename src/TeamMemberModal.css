@@ -25,6 +25,32 @@
   height: 150px;
 }
 
+.modal-banner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.modal-close-button-wrapper {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  background-color: hsl(360, 100%, 80%);
+  border-radius: 25px;
+  box-shadow: inset 0 10px 24px hsl(224, 0%, 0%, 0.2);
+  height: 48px;
+  width: 48px;
+  text-align: center;
+}
+
+.modal-close-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 36px;
+  cursor: pointer;
+}
+
 .modal-profile-photo-wrapper {
   margin-top: 60px;
   height: 100px;
@@ -61,21 +87,44 @@
   justify-content: space-around;
 }
 
+.modal-headline {
+  color: hsl(262, 72%, 25%);
+  font-weight: 700;
+}
+
 .modal-profile-activity {
   display: flex;
   flex-direction: column;
 }
 
-.modal-activity-headline {
+.modal-info-headline {
   font-size: 24px;
+}
+
+.modal-item {
+  text-indent: 5px;
 }
 
 .modal-activity-report {
   display: flex;
   flex-direction: column;
 }
+
 .modal-activity {
   font-size: 16px;
+}
+
+.modal-activity-delete {
+  color: hsl(354, 85%, 44%);
+}
+
+.modal-activity-add {
+  color: hsl(170, 91%, 32%);
+}
+
+.modal-activity-timestamp {
+  text-indent: 15%;
+  color: hsl(210, 22%, 49%);
 }
 
 .modal-profile-projects {
