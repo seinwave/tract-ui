@@ -1,0 +1,138 @@
+.new-modal {
+  z-index: 999;
+  position: absolute;
+  border-radius: 25px;
+  left: 20%;
+  top: 40%;
+  width: 800px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: hsl(210, 36%, 96%, 0.9);
+  box-shadow: inset 0 1px 0 hsl(224, 84%, 74%);
+  box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
+}
+
+.modal-hero {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  background-color: hsl(262, 72%, 25%);
+  width: 100%;
+  height: 150px;
+}
+
+.modal-banner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.modal-close-button-wrapper {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  background-color: hsl(360, 100%, 80%);
+  border-radius: 25px;
+  box-shadow: inset 0 10px 24px hsl(224, 0%, 0%, 0.2);
+  height: 48px;
+  width: 48px;
+  text-align: center;
+}
+
+.modal-close-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.modal-profile-photo-wrapper {
+  margin-top: 60px;
+  height: 100px;
+}
+
+.modal-profile-photo {
+  height: 150px;
+  width: 150px;
+  border-radius: 100px;
+  border: 5px solid hsl(210, 36%, 96%, 0.9);
+}
+
+.modal-profile-headline {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-profile-name {
+  font-size: 32px;
+  color: hsl(261, 47%, 58%);
+}
+
+.modal-profile-title {
+  font-size: 24px;
+}
+
+.modal-info-wrapper {
+  margin-top: 25%;
+  width: 800px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.modal-headline {
+  color: hsl(262, 72%, 25%);
+  font-weight: 700;
+}
+
+.modal-profile-activity {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-info-headline {
+  font-size: 24px;
+}
+
+.modal-item {
+  text-indent: 5px;
+}
+
+.modal-activity-report {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-activity {
+  font-size: 16px;
+}
+
+.modal-activity-delete {
+  color: hsl(354, 85%, 44%);
+}
+
+.modal-activity-add {
+  color: hsl(170, 91%, 32%);
+}
+
+.modal-activity-timestamp {
+  text-indent: 15%;
+  color: hsl(210, 22%, 49%);
+}
+
+.modal-profile-projects {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-profile-contact {
+  display: flex;
+  flex-direction: column;
+}

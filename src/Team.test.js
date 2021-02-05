@@ -123,7 +123,7 @@ it("shows the user's most recent activity", () => {
   activityDates.map((date) => {
     return dates.push(date.textContent);
   });
-  const expectedDates = ["23 days ago", "23 days ago"];
+  const expectedDates = ["24 days ago", "24 days ago"];
   expect(dates).toEqual(expect.arrayContaining(expectedDates));
 });
 
@@ -161,4 +161,18 @@ it("has a modal can be closed with an 'X' button", () => {
   userEvent.click(closeButton);
   modal = screen.queryByTestId(/user-profile-modal/i);
   expect(modal).toBeNull();
+});
+
+it("has an 'add new' button that opens a member creation modal", () => {
+  render(<Team teamData={team} />);
+  // add button's there, modal is not
+  let addButton = screen.getByText(/add new/i);
+  let modal = screen.queryByTestId(/new-modal/i);
+  expect(addButton).not.toBeNull();
+  expect(modal).toBeNull();
+
+  // add button works
+  userEvent.click(addButton);
+  modal = screen.queryByTestId(/new-modal/i);
+  expect(modal).not.toBeNull();
 });
