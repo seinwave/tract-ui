@@ -1,6 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import Team from "./Team";
+
+dayjs.extend(relativeTime);
 
 const team = [
   {
@@ -123,7 +127,11 @@ it("shows the user's most recent activity", () => {
   activityDates.map((date) => {
     return dates.push(date.textContent);
   });
-  const expectedDates = ["24 days ago", "24 days ago"];
+
+  const expectedDates = team.map((t) =>
+    dayjs(t.user_activity[0].timestamp).fromNow()
+  );
+
   expect(dates).toEqual(expect.arrayContaining(expectedDates));
 });
 
